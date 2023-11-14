@@ -1,9 +1,9 @@
 import 'dotenv/config'
-import openAi from 'openai'
+import {openai} from './openai.js'
 //readline module for handling user input/output
 import readline from 'node:readline' ;
+import colors from 'colors' ;
 
-const openai=new openAi({apiKey:process.env.OPEN_AI_API_KEY})
 
 const rl =readline.createInterface({
     input:process.stdin ,
@@ -42,7 +42,7 @@ const handleUserInput = async userInput => {
   // Update the chat history with the user's input and the AI's response
   history.push(userMessage, response);
 
-  console.log(`\n\nAI: ${response.content}\n\n`);
+  console.log( `\n\n` +colors.bold.magenta ("AI : ") +`${response.content}\n\n`);
 
   // Prompt the user for the next input
   start();
@@ -66,7 +66,7 @@ const chat = () => {
   start();
 
   // Display the initial message from the AI
-  console.log('\n\nAI: How can I help you today?\n\n');
+  console.log(colors.bold.magenta('\n\nAI') +`:  How can I help you?\n\n`);
 };
 
 // Log a message indicating that the chatbot has been initialized
